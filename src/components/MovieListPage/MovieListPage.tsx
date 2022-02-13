@@ -1,7 +1,8 @@
 import React, {FC, useEffect, useState} from 'react';
 import styles from './MovieListPage.module.scss';
 import {useDispatch, useSelector} from "react-redux";
-import {fetchMoviesList} from "../../app/reducers/movies.reducer";
+// import {fetchMoviesList, receiveMoorMovies, searchMovies} from "../../app/reducers/movies.reducer";
+import {fetchMoviesList, receiveMoorMovies} from "../../app/reducers/movies.reducer";
 import MovieItem from "../MovieItem/MovieItem";
 import InfiniteScroll from "react-infinite-scroll-component";
 import FilmLoader from "../FilmLoader/FilmLoader";
@@ -13,7 +14,7 @@ interface MovieListPageProps {
 const MovieListPage: FC<MovieListPageProps> = () => {
     const dispatch = useDispatch();
     const {results, totalPages} = useSelector((state: any) => state.movies.popular);
-    const {searchResults, searchTotalPages} = useSelector((state: any) => state.movies.search);
+    const {searchResults, searchTotalPages, query} = useSelector((state: any) => state.movies.search);
     const [page, setPage]: [number, any] = useState(1);
     const [hasMorePages, setHasMorePages]: [boolean, any] = useState(true);
     const [moviesList, setMoviesList] = useState([]);
@@ -25,7 +26,7 @@ const MovieListPage: FC<MovieListPageProps> = () => {
             return;
         }
 
-        if (searchResults?.length === 0 ) {
+        if (searchResults?.length === 0) {
             setMoviesList([]);
 
             return;
@@ -35,14 +36,15 @@ const MovieListPage: FC<MovieListPageProps> = () => {
     }, [results, searchResults]);
 
     useEffect(() => {
+        dispatch(receiveMoorMovies({query, page}));
         dispatch(fetchMoviesList(page));
-    }, [dispatch, page]);
+    }, [dispatch, page, query]);
 
     useEffect(() => {
         if (searchTotalPages) {
             setHasMorePages(searchTotalPages > page);
             return;
-        };
+        }
         setHasMorePages(totalPages > page);
     }, [dispatch, page, totalPages, searchTotalPages]);
 
@@ -54,23 +56,24 @@ const MovieListPage: FC<MovieListPageProps> = () => {
     return (
 
         <>
-        <InfiniteScroll next={receiveMoreFilms}
-                        hasMore={hasMorePages}
-                        className={styles.MovieListPage}
-                        loader={<FilmLoader/>}
-                        dataLength={moviesList.length}>
-            {moviesList.length ? moviesList.map((film: any, index: number) => (
-                <MovieItem key={index}
-                           id={film.id}
-                           title={film.title}
-                           img={film.poster_path}
-                           overview={film.overview}
-                           vote={film.vote_average}
-                           date={film.release_date}
-                />
-            )) : <div className={styles.searchError}><h1>Поиск не дал Результата.</h1></div>}
-        </InfiniteScroll>
-            <ScrollToTop className={styles.ToTop} smooth top={600} color={"#fff"} style={{background:"rgb(0 0 0 / 48%)"}} />
+            <InfiniteScroll next={receiveMoreFilms}
+                            hasMore={hasMorePages}
+                            className={styles.MovieListPage}
+                            loader={<FilmLoader/>}
+                            dataLength={moviesList.length}>
+                {moviesList.length ? moviesList.map((film: any, index: number) => (
+                    <MovieItem key={index}
+                               id={film.id}
+                               title={film.title}
+                               img={film.poster_path}
+                               overview={film.overview}
+                               vote={film.vote_average}
+                               date={film.release_date}
+                    />
+                )) : <div className={styles.searchError}><h1>Поиск не дал Результата.</h1></div>}
+            </InfiniteScroll>
+            <ScrollToTop className={styles.ToTop} smooth top={600} color={"#fff"}
+                         style={{background: "rgb(0 0 0 / 48%)"}}/>
 
         </>
     )

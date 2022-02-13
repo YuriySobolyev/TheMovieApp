@@ -1,16 +1,17 @@
-import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 
 interface IMovies {
     popular: {
         totalPages: number | null;
-        results:any [];
+        results: any [];
     },
     search: {
         searchTotalPages: number | null;
         searchResults: any;
+        query: string;
     },
     currentMovie: null;
-};
+}
 
 const url = process.env.REACT_APP_URL;
 const authToken = process.env.REACT_APP_AUTH_TOKEN;
@@ -23,6 +24,7 @@ const initialState = {
     search: {
         searchTotalPages: null,
         searchResults: null,
+        query: "",
     },
     currentMovie: null
 } as IMovies;
@@ -44,17 +46,30 @@ export const fetchMoviesList = createAsyncThunk(
 export const fetchMovieDitails = createAsyncThunk(
     'movies/fetchMovieDitails',
     async (id: number) => {
-        const response = await fetch(`${url}/3/movie/${id}?api_key=${authToken}&language=ru`)
+        return await fetch(`${url}/3/movie/${id}?api_key=${authToken}&language=ru`)
             .then(res => res.json())
             .then(json => json);
-
-        return response;
     }
 )
 
 export const searchMovies = createAsyncThunk(
     'movies/searchMovies',
-    async ({query, page}: any) => {
+    async (query: string) => {
+        const response = await fetch(`${url}/3/search/movie?api_key=${authToken}&language=ru&include_adult=false&page=1&query=${query}`)
+            .then(res => res.json())
+            .then(json => json);
+
+        return {
+            totalPages: response.total_pages,
+            results: response.results,
+            query,
+        };
+    }
+)
+
+export const receiveMoorMovies = createAsyncThunk(
+    'movies/receiveMoorMovies',
+    async ({query, page = 2}: any) => {
         const response = await fetch(`${url}/3/search/movie?api_key=${authToken}&language=ru&include_adult=false&page=${page}&query=${query}`)
             .then(res => res.json())
             .then(json => json);
@@ -69,9 +84,7 @@ export const searchMovies = createAsyncThunk(
 const moviesSlice = createSlice({
     name: 'movies',
     initialState,
-    reducers: {
-
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder.addCase(fetchMoviesList.fulfilled, (state, action) => {
             state.popular.results.push(...action.payload.results)
@@ -82,6 +95,11 @@ const moviesSlice = createSlice({
         });
         builder.addCase(searchMovies.fulfilled, (state, action) => {
             state.search.searchResults = [...action.payload.results]
+            state.search.searchTotalPages = action.payload.totalPages;
+            state.search.query = action.payload.query;
+        });
+        builder.addCase(receiveMoorMovies.fulfilled, (state, action) => {
+            state.search.searchResults.push(...action.payload.results);
             state.search.searchTotalPages = action.payload.totalPages;
         });
     },

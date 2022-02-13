@@ -11,7 +11,7 @@ const MovieHeader: FC<MovieHeaderProps> = () => {
     const dispatch = useDispatch();
     const search = (event: any) => {
         const query = event.target.value;
-        dispatch(searchMovies({query, page: 1}));
+        dispatch(searchMovies(query));
     };
 
     return (
