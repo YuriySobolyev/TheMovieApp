@@ -1,0 +1,121 @@
+.MovieItem {
+  color: #d9d2d2;
+  background: black;
+  position: relative;
+  padding: 0.5rem;
+
+  &:hover > .info {
+    opacity: 1;
+  }
+
+  &:hover > .Poster img {
+    transform: scale(1.02);
+    overflow: hidden;
+    opacity: 0.4;
+    filter: blur(1px);
+  }
+}
+
+.info {
+  top: 0.5rem;
+  height: 450px;
+  width: 300px;
+  position: absolute;
+  //background: rgba(0, 0, 0, 0.69);
+  box-sizing: border-box;
+  text-align: justify;
+  overflow: hidden;
+  //padding: 0.5em;
+  opacity: 0;
+  transition: opacity ease-in-out 0.5s;
+  //
+  //background: linear-gradient(to bottom, white 85%, rgba(255, 255, 255, 0) 100%);
+  //background-clip: border-box;
+  //-webkit-background-clip: text;
+  //-webkit-text-fill-color: #fff0;
+}
+
+.info:before{
+  content: "";
+  display: block;
+  height: 50px;
+  width: 300px;
+  top: 400px;
+  position: absolute;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #000 89%);
+}
+
+.Poster {
+  display: block;
+  width: 300px;
+  height: 450px;
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+.Poster img {
+  width: 300px;
+  height: 450px;
+  transition: all ease-in-out 0.5s;
+}
+
+//.Poster:hover {
+//  border-radius: 5rem;
+//}
+
+.info p {
+  margin: 0.5rem;
+}
+
+.footInfo {
+  width: 100%;
+  max-width: 300px;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.title {
+  text-align: center;
+  text-decoration: none;
+  color: #e3e9f6;
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 60px;
+}
+
+.footInfoDateRait {
+}
+
+.vote {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+
+}
+
+.vote:before {
+  content: "";
+  display: block;
+  float: left;
+  margin-right: 15px;
+  width: 20px;
+  height: 20px;
+  background: center / contain no-repeat url("img/star.png");
+}
+
+.year {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0.5rem;
+  margin: 0;
+}
+
+@media screen and (max-width: 1024){
+
+}
+
+@media screen and (max-width: 768px) {
+
+}
+
