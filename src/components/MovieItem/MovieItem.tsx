@@ -1,6 +1,8 @@
-import React, { FC } from 'react';
+import React, {FC} from 'react';
 import styles from './MovieItem.module.scss';
 import {Link} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {togleFavorites} from "../../app/reducers/movies.reducer";
 
 interface MovieItemProps {
     title: string;
@@ -13,29 +15,43 @@ interface MovieItemProps {
 
 const imgUrlBase = process.env.REACT_APP_IMG_URL;
 
-const MovieItem: FC<MovieItemProps> = (
-    {
-        title ,
-        img ,
-        id ,
-        date ,
-        overview ,
-        vote ,
-    }
-) => (
-  <div className={styles.MovieItem}>
-      <div className={styles.Poster}><img src={`${imgUrlBase}${img}`} alt={`Poster to the ${title}`}/></div>
-      <div className={styles.info} >
-            <p>{overview}</p>
-      </div>
-      <div className={styles.footInfo}>
-          <Link to={`movie/${id}-${title}`}><h3 className={styles.title}>{title}</h3></Link>
-          <div className={styles.footInfoDateRait}>
-              <p className={styles.year}>{new Date(date).getFullYear()}</p>
-              <div className={styles.vote}>{vote}</div>
-          </div>
-      </div>
-  </div>
-);
 
+const MovieItem: FC<MovieItemProps> = (props:any) => {
+    const {
+        title,
+        img,
+        id,
+        vote,
+        overview,
+        date
+    } = props;
+
+    const dispatch = useDispatch();
+
+
+    const handleMarkFavMovies = () => {
+        dispatch(togleFavorites(props));
+    };
+
+
+
+    return (
+        <div className={styles.MovieItem}>
+            {/*<div className={styles.Poster}><img src={`${imgUrlBase}${img}`} alt={`Poster to the ${title}`}/></div>*/}
+            <div className={styles.Poster}><img src={`${imgUrlBase}${img}`} alt={`Poster to the ${title}`}/></div>
+            <div className={styles.info}>
+                <p>{overview}</p>
+            </div>
+            <div className={styles.footInfo}>
+                <Link to={`/movie/${id}-${title}`}><h3 className={styles.title}>{title}</h3></Link>
+                <div className={styles.footInfoDateRate}>
+                    <p className={styles.year}>{new Date(date).getFullYear()}</p>
+                    <div className={styles.favBtn} onClick={handleMarkFavMovies}/>
+                    <div className={styles.vote}>{vote}</div>
+                </div>
+            </div>
+            {/*<div className={styles.favBtn} onClick={handleMarkFavMovies}/>*/}
+        </div>
+    );
+}
 export default MovieItem;

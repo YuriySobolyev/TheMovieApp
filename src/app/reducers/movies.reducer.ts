@@ -10,6 +10,7 @@ interface IMovies {
         searchResults: any;
         query: string;
     },
+    favorites: any[],
     currentMovie: null;
 }
 
@@ -26,6 +27,7 @@ const initialState = {
         searchResults: null,
         query: "",
     },
+    favorites: [],
     currentMovie: null
 } as IMovies;
 
@@ -43,8 +45,8 @@ export const fetchMoviesList = createAsyncThunk(
     }
 )
 
-export const fetchMovieDitails = createAsyncThunk(
-    'movies/fetchMovieDitails',
+export const fetchMovieDetails = createAsyncThunk(
+    'movies/fetchMovieDetails',
     async (id: number) => {
         return await fetch(`${url}/3/movie/${id}?api_key=${authToken}&language=ru`)
             .then(res => res.json())
@@ -84,13 +86,26 @@ export const receiveMoorMovies = createAsyncThunk(
 const moviesSlice = createSlice({
     name: 'movies',
     initialState,
-    reducers: {},
+    reducers: {
+        togleFavorites(state, action: any) {
+            const filmExist = state.favorites.find((film: any) => {
+                return film.id === action.payload.id;
+            })
+            if (filmExist) {
+                state.favorites = state.favorites.filter((film: any) => {
+                    return film.id !== filmExist.id;
+                });
+                return;
+            }
+            state.favorites.push(action.payload);
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(fetchMoviesList.fulfilled, (state, action) => {
             state.popular.results.push(...action.payload.results)
             state.popular.totalPages = action.payload.totalPages;
         });
-        builder.addCase(fetchMovieDitails.fulfilled, (state, action) => {
+        builder.addCase(fetchMovieDetails.fulfilled, (state, action) => {
             state.currentMovie = {...action.payload};
         });
         builder.addCase(searchMovies.fulfilled, (state, action) => {
@@ -105,4 +120,5 @@ const moviesSlice = createSlice({
     },
 })
 
+export const {togleFavorites} = moviesSlice.actions;
 export default moviesSlice.reducer

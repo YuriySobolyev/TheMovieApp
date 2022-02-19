@@ -2,7 +2,8 @@
   color: #d9d2d2;
   background: black;
   position: relative;
-  padding: 0.5rem;
+  //padding: 0.5rem;
+  border-radius: 0.5rem;
 
   &:hover > .info {
     opacity: 1;
@@ -10,14 +11,13 @@
 
   &:hover > .Poster img {
     transform: scale(1.02);
-    overflow: hidden;
     opacity: 0.4;
     filter: blur(1px);
   }
 }
 
 .info {
-  top: 0.5rem;
+  top: 0;
   height: 450px;
   width: 300px;
   position: absolute;
@@ -28,11 +28,6 @@
   //padding: 0.5em;
   opacity: 0;
   transition: opacity ease-in-out 0.5s;
-  //
-  //background: linear-gradient(to bottom, white 85%, rgba(255, 255, 255, 0) 100%);
-  //background-clip: border-box;
-  //-webkit-background-clip: text;
-  //-webkit-text-fill-color: #fff0;
 }
 
 .info:before{
@@ -42,7 +37,7 @@
   width: 300px;
   top: 400px;
   position: absolute;
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #000 89%);
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), #000000 89%);
 }
 
 .Poster {
@@ -59,9 +54,21 @@
   transition: all ease-in-out 0.5s;
 }
 
-//.Poster:hover {
-//  border-radius: 5rem;
-//}
+.Poster img:after{
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  width: 300px;
+  height: 450px;
+  background: black;
+  background: center / contain no-repeat url("img/movieImagePlaceholder600.jpg");
+  border-radius: 0.5rem;
+  //transition: all ease-in-out 0.5s;
+  //transform: scale(1.01);
+}
+
 
 .info p {
   margin: 0.5rem;
@@ -70,8 +77,11 @@
 .footInfo {
   width: 100%;
   max-width: 300px;
-  padding: 1rem;
   box-sizing: border-box;
+}
+
+.footInfo a {
+  text-decoration: none;
 }
 
 .title {
@@ -84,38 +94,57 @@
   min-height: 60px;
 }
 
-.footInfoDateRait {
+.footInfoDateRate {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
 }
 
 .vote {
-  position: absolute;
-  bottom: 0.5rem;
-  right: 0.5rem;
-
+  display: block;
+  width: 45px;
+  text-align: right;
 }
 
 .vote:before {
   content: "";
   display: block;
   float: left;
-  margin-right: 15px;
   width: 20px;
   height: 20px;
   background: center / contain no-repeat url("img/star.png");
 }
 
 .year {
-  position: absolute;
-  bottom: 0.5rem;
-  left: 0.5rem;
-  margin: 0;
+  display: block;
+  width: 45px;
 }
 
-@media screen and (max-width: 1024){
+.favBtn {
+  display: block;
+  width: 25px;
+  height: 25px;
+  background: center / contain no-repeat url("img/fav.png");
+
+}
+
+.favBtnA {
+  background: crimson;
+}
+
+@media screen and (max-width: 1024px){
 
 }
 
 @media screen and (max-width: 768px) {
-
+  .info, .info:before, .Poster, .Poster img , .Poster img:after {
+    width: 150px;
+    height: 225px;
+  }
+  .footInfo {
+     width: 100%;
+     max-width: 150px;
+   }
 }
 

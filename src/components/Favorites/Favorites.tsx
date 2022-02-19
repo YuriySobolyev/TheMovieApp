@@ -1,14 +1,25 @@
-import React, { FC } from 'react';
+import React, {FC, useEffect} from 'react';
 import styles from './Favorites.module.scss';
+import {useSelector} from "react-redux";
+import MovieItem from "../MovieItem/MovieItem";
 
-interface FavoritesProps {}
+interface FavoritesProps {
+}
 
 const Favorites: FC<FavoritesProps> = () => {
-  return (
-  <div className={styles.Favorites}>
-    Favorites Component
-  </div>
-  )
+    const favorites = useSelector((state: any) => state.movies.favorites);
+
+    useEffect(() => {
+    }, [])
+    return (
+        <div className={styles.Favorites}>
+            {favorites.length ? favorites.map((film: any) => {
+                return (
+                    <MovieItem {...film}/>
+                );
+            }) : <h1>В избрпнном пусто ...</h1>}
+        </div>
+    )
 };
 
 export default Favorites;

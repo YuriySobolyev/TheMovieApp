@@ -1,1 +1,7 @@
-.Favorites {}
+.Favorites {
+  color: #d9d2d2;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}

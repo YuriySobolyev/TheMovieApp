@@ -1,12 +1,77 @@
 .MovieHeader {
   background: #131313;
+  margin: auto;
+  max-width: 1280px;
+  gap: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
 }
 
-.NavBar {}
-
-.NavBrand {
+.NavBrand a {
   background: center / contain no-repeat url("img/logo2.png") #131313;
-  display: block;
+  display: flex;
   height: 65px;
   width: 65px;
+}
+
+.NavBar {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.NavBar a {
+  color: #d9d2d2;
+  text-decoration: none;
+  display: flex;
+  height: 65px;
+  align-items: center;
+  transition: color ease-in-out 0.5s;
+  padding: 0 1em;
+}
+
+.NavBar a:hover {
+  color: #757575;
+}
+
+.Search {
+  display: flex;
+}
+
+.Search input {
+  border-radius: 5px 0 0 5px;
+}
+
+.Search input,
+.Search button {
+  border: 1px solid #fff;
+  padding: 0 20px;
+  font-size: 16px;
+  height: 40px;
+  box-sizing: border-box;
+}
+
+.Search button {
+  background: center / 20px no-repeat url("img/search.png") #d9d2d2;
+  color: #757575;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+.Search button:hover {
+  outline-color: #d9d2d2;
+}
+
+.Search input[type="text"]:focus {
+  background: #fff;
+  color: #757575;
+  outline-color: #d9d2d2;
+}
+
+
+@media screen and (max-width: 768px) {
+  .MovieHeader {
+    flex-direction: column;
+  }
 }
