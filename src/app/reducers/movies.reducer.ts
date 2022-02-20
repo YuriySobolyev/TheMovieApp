@@ -12,6 +12,8 @@ interface IMovies {
     },
     favorites: any[],
     currentMovie: null;
+    currentMovieVideo: null;
+    recommendations: any[]
 }
 
 const url = process.env.REACT_APP_URL;
@@ -28,7 +30,9 @@ const initialState = {
         query: "",
     },
     favorites: [],
-    currentMovie: null
+    currentMovie: null,
+    currentMovieVideo: null,
+    recommendations: []
 } as IMovies;
 
 export const fetchMoviesList = createAsyncThunk(
@@ -49,6 +53,26 @@ export const fetchMovieDetails = createAsyncThunk(
     'movies/fetchMovieDetails',
     async (id: number) => {
         return await fetch(`${url}/3/movie/${id}?api_key=${authToken}&language=ru`)
+            .then(res => res.json())
+            .then(json => json);
+    }
+)
+
+export const fetchRecommendations = createAsyncThunk(
+    'movies/fetchRecommendations',
+    async (id: number) => {
+        const response = await fetch(`https://api.themoviedb.org/3/movie/597208/recommendations?api_key=0e152fc98326ec17d5ac7b6f13aaba74&language=ru&page=1`)
+            .then(res => res.json())
+            .then(json => json);
+
+        return response.results;
+    }
+);
+
+export const fetchMovieVideo = createAsyncThunk(
+    'movies/fetchMovieVideo',
+    async (id: number) => {
+        return await fetch(`${url}/3/movie/${id}/videos?api_key=${authToken}`)
             .then(res => res.json())
             .then(json => json);
     }
@@ -107,6 +131,12 @@ const moviesSlice = createSlice({
         });
         builder.addCase(fetchMovieDetails.fulfilled, (state, action) => {
             state.currentMovie = {...action.payload};
+        });
+        builder.addCase(fetchRecommendations.fulfilled, (state, action) => {
+            state.recommendations = [...action.payload];
+        });
+        builder.addCase(fetchMovieVideo.fulfilled, (state, action) => {
+            state.currentMovieVideo = {...action.payload};
         });
         builder.addCase(searchMovies.fulfilled, (state, action) => {
             state.search.searchResults = [...action.payload.results]

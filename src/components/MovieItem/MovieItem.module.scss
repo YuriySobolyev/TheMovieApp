@@ -103,8 +103,9 @@
 
 .vote {
   display: block;
-  width: 45px;
+  width: 55px;
   text-align: right;
+  font-size: .9em;
 }
 
 .vote:before {
@@ -119,6 +120,8 @@
 .year {
   display: block;
   width: 45px;
+  max-width: 45px;
+  font-size: .9em;
 }
 
 .favBtn {
@@ -130,7 +133,10 @@
 }
 
 .favBtnA {
-  background: crimson;
+  display: block;
+  width: 25px;
+  height: 25px;
+  background: center / contain no-repeat url("img/favA.png");
 }
 
 @media screen and (max-width: 1024px){

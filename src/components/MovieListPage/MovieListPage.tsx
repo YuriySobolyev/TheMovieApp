@@ -69,6 +69,7 @@ const MovieListPage: FC<MovieListPageProps> = () => {
                                overview={film.overview}
                                vote={film.vote_average}
                                date={film.release_date}
+                               genres={film.genre_ids}
                     />
                 )) : <div className={styles.searchError}><h1>Поиск не дал Результата.</h1></div>}
             </InfiniteScroll>

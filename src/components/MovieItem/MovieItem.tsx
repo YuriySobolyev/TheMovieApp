@@ -11,6 +11,7 @@ interface MovieItemProps {
     overview: string;
     vote: number;
     date: string;
+    genres: string;
 }
 
 const imgUrlBase = process.env.REACT_APP_IMG_URL;
@@ -38,7 +39,18 @@ const MovieItem: FC<MovieItemProps> = (props:any) => {
     return (
         <div className={styles.MovieItem}>
             {/*<div className={styles.Poster}><img src={`${imgUrlBase}${img}`} alt={`Poster to the ${title}`}/></div>*/}
-            <div className={styles.Poster}><img src={`${imgUrlBase}${img}`} alt={`Poster to the ${title}`}/></div>
+            <div className={styles.Poster}>
+                {/*<img src={`${imgUrlBase}${img}`} alt={`Poster to the ${title}`}/>*/}
+
+                <img
+                     src={img ?`${imgUrlBase}w500${img}` : `https://cringemdb.com/img/movie-poster-placeholder.png` }
+                     alt={title}
+                />
+
+
+
+
+            </div>
             <div className={styles.info}>
                 <p>{overview}</p>
             </div>
@@ -50,7 +62,6 @@ const MovieItem: FC<MovieItemProps> = (props:any) => {
                     <div className={styles.vote}>{vote}</div>
                 </div>
             </div>
-            {/*<div className={styles.favBtn} onClick={handleMarkFavMovies}/>*/}
         </div>
     );
 }

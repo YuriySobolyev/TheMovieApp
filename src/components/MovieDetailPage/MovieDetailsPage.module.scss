@@ -1,7 +1,85 @@
 .MovieDetailPage {
+  position: relative;
   color: #d9d2d2;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1280px;
+  margin: auto;
+}
+
+.imgDetailBackdrop {
+  width: 100%;
+}
+
+.infoDetailPage {
+  margin: -50% 1rem 0 1rem;
+  width: 50%;
+  padding: 1rem;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.69);
+}
+
+.videoDetailPage {
+  margin: 1rem;
+  width: 50%;
+  padding: 1rem;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.69);
+}
+
+.yv {
+  display: flex;
+  justify-content: space-between;
+}
+
+.vote {
+  width: 50px;
+}
+
+.vote:before {
+  content: "";
+  display: block;
+  float: left;
+  width: 20px;
+  height: 20px;
+  background: center / contain no-repeat url("img/star.png");
+}
+
+.year, .vote {
+}
+
+.recDetailPage {
+  display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 1rem;
+  margin: 1rem;
+  width: 50%;
+  padding: 1rem;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.69);
+}
+
+.recDetailPage p {
+  display: block;
+  width: 100%;
+}
+
+.RecMovie {
+  display: flex;
+}
+
+
+@media screen and (max-width: 768px) {
+  .infoDetailPage, .videoDetailPage, .recDetailPage {
+    margin: 1rem;
+    width: calc(100% - 4rem);
+    padding: 1rem;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.55);
+  }
+  .infoDetailPage {
+    margin-top: -20%;
+  }
 }
