@@ -61,7 +61,7 @@ export const fetchMovieDetails = createAsyncThunk(
 export const fetchRecommendations = createAsyncThunk(
     'movies/fetchRecommendations',
     async (id: number) => {
-        const response = await fetch(`https://api.themoviedb.org/3/movie/597208/recommendations?api_key=0e152fc98326ec17d5ac7b6f13aaba74&language=ru&page=1`)
+        const response = await fetch(`${url}/3/movie/${id}/recommendations?api_key=${authToken}&language=ru&page=1`)
             .then(res => res.json())
             .then(json => json);
 

@@ -24,7 +24,7 @@ const MovieDetailsPage: FC<MovieDetailPageProps> = () => {
         dispatch(fetchRecommendations(id));
     }, [dispatch, id]);
 
-    const displayRecommendations = recommendations?.slice(0, 3).map(
+    const displayRecommendations = recommendations?.slice(0, 6).map(
         (film: any, index: number) => {
             return (
                 <div className={styles.RecMovie}><MovieItem key={index}
