@@ -18,7 +18,7 @@ const MovieHeader: FC<MovieHeaderProps> = () => {
     return (
         <div className={styles.MovieHeader}>
             <div className={styles.NavBar}>
-                <div className={styles.NavBrand}></div>
+                <div className={styles.NavBrand}/>
 
                 <Link to={"/"}>Главная</Link>
                 <Link to={"/favorites"}>Избранное</Link>

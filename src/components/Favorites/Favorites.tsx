@@ -17,7 +17,7 @@ const Favorites: FC<FavoritesProps> = () => {
                 return (
                     <MovieItem {...film}/>
                 );
-            }) : <h1>В избрпнном пусто ...</h1>}
+            }) : <h1>В избранном пусто ...</h1>}
         </div>
     )
 };
