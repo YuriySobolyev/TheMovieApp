@@ -72,7 +72,7 @@ export const fetchRecommendations = createAsyncThunk(
 export const fetchMovieVideo = createAsyncThunk(
     'movies/fetchMovieVideo',
     async (id: number) => {
-        return await fetch(`${url}/3/movie/${id}/videos?api_key=${authToken}`)
+        return await fetch(`${url}/3/movie/${id}/videos?api_key=${authToken}&language=ru`)
             .then(res => res.json())
             .then(json => json);
     }

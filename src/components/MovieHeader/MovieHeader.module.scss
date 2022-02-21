@@ -9,7 +9,7 @@
   padding: 1.5rem;
 }
 
-.NavBrand a {
+.NavBrand {
   background: center / contain no-repeat url("img/logo2.png") #131313;
   display: flex;
   height: 65px;
@@ -19,16 +19,21 @@
 .NavBar {
   display: flex;
   gap: 1.5rem;
+  align-items: center;
 }
 
 .NavBar a {
   color: #d9d2d2;
   text-decoration: none;
   display: flex;
-  height: 65px;
+  height: 30px;
+  background: #343434;
+  border-radius: 15px;
   align-items: center;
   transition: color ease-in-out 0.5s;
   padding: 0 1em;
+  box-sizing: border-box;
+  font-size: 15px;
 }
 
 .NavBar a:hover {
@@ -37,26 +42,34 @@
 
 .Search {
   display: flex;
+  flex-direction:row;
+  width: 100%;
+  //border: 1px solid #fff;
+  border-radius: 15px;
 }
 
 .Search input {
-  border-radius: 5px 0 0 5px;
+  border-radius: 15px 0 0 15px;
+  flex-grow:2;
+  border:none;
+  background: #d9d2d2;
 }
 
 .Search input,
 .Search button {
-  border: 1px solid #fff;
   padding: 0 20px;
   font-size: 16px;
-  height: 40px;
+  height: 30px;
   box-sizing: border-box;
+  outline: none;
 }
 
 .Search button {
-  background: center / 20px no-repeat url("img/search.png") #d9d2d2;
+  background: center / 15px no-repeat url("img/search.png") #d9d2d2;
   color: #757575;
-  border-radius: 0 5px 5px 0;
+  border-radius: 0 15px 15px 0;
   cursor: pointer;
+  border: none;
 }
 
 .Search button:hover {
@@ -64,9 +77,8 @@
 }
 
 .Search input[type="text"]:focus {
-  background: #fff;
+  //background: #fff;
   color: #757575;
-  outline-color: #d9d2d2;
 }
 
 
