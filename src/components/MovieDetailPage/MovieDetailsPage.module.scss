@@ -31,6 +31,7 @@
 .yv {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .vote {
@@ -47,6 +48,21 @@
 }
 
 .year, .vote {
+}
+
+.favBtn {
+  display: block;
+  width: 25px;
+  height: 25px;
+  background: center / contain no-repeat url("../MovieItem/img/fav.png");
+
+}
+
+.favBtnA {
+  display: block;
+  width: 25px;
+  height: 25px;
+  background: center / contain no-repeat url("../MovieItem/img/favA.png");
 }
 
 .recDetailPage {

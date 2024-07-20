@@ -114,14 +114,16 @@ const moviesSlice = createSlice({
         togleFavorites(state, action: any) {
             const filmExist = state.favorites.find((film: any) => {
                 return film.id === action.payload.id;
-            })
+        })
             if (filmExist) {
                 state.favorites = state.favorites.filter((film: any) => {
                     return film.id !== filmExist.id;
+                    // film.classNames === 'fav'
                 });
                 return;
             }
             state.favorites.push(action.payload);
+            
         }
     },
     extraReducers: (builder) => {

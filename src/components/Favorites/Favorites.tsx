@@ -6,6 +6,8 @@ import MovieItem from "../MovieItem/MovieItem";
 interface FavoritesProps {
 }
 
+
+
 const Favorites: FC<FavoritesProps> = () => {
     const favorites = useSelector((state: any) => state.movies.favorites);
 
@@ -23,3 +25,5 @@ const Favorites: FC<FavoritesProps> = () => {
 };
 
 export default Favorites;
+
+

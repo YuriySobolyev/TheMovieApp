@@ -1,7 +1,6 @@
 import React, {FC, useEffect, useState} from 'react';
 import styles from './MovieListPage.module.scss';
 import {useDispatch, useSelector} from "react-redux";
-// import {fetchMoviesList, receiveMoorMovies, searchMovies} from "../../app/reducers/movies.reducer";
 import {fetchMoviesList, receiveMoorMovies} from "../../app/reducers/movies.reducer";
 import MovieItem from "../MovieItem/MovieItem";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -81,3 +80,4 @@ const MovieListPage: FC<MovieListPageProps> = () => {
 };
 
 export default MovieListPage;
+

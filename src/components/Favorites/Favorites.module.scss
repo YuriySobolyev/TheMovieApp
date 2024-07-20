@@ -5,3 +5,9 @@
   justify-content: center;
   gap: 1rem;
 }
+.favBtn {
+  display: block;
+  width: 25px;
+  height: 25px;
+  background: center / contain no-repeat url("../MovieItem/img/favA.png");
+}

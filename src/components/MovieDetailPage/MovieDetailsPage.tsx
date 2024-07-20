@@ -2,14 +2,21 @@ import React, {FC, useEffect} from 'react';
 import styles from './MovieDetailsPage.module.scss';
 import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchMovieDetails, fetchMovieVideo, fetchRecommendations} from "../../app/reducers/movies.reducer";
+import {
+    fetchMovieDetails,
+    fetchMovieVideo,
+    fetchRecommendations,
+} from "../../app/reducers/movies.reducer";
 import MovieVideoPage from "../MovieVideoPage/MovieVideoPage";
 import MovieItem from "../MovieItem/MovieItem";
 
 interface MovieDetailPageProps {
 }
 
+
 const MovieDetailsPage: FC<MovieDetailPageProps> = () => {
+
+
     const {id}: any = useParams();
     const dispatch = useDispatch();
     const details = useSelector((state: any) => state.movies.currentMovie);
@@ -17,6 +24,7 @@ const MovieDetailsPage: FC<MovieDetailPageProps> = () => {
     const recommendations = useSelector(
         (state: any) => state.movies.recommendations
     );
+
 
     useEffect(() => {
         dispatch(fetchMovieDetails(id));
@@ -40,6 +48,9 @@ const MovieDetailsPage: FC<MovieDetailPageProps> = () => {
         }
     );
 
+
+
+
     return (
 
         <div className={styles.MovieDetailPage}>
@@ -54,6 +65,9 @@ const MovieDetailsPage: FC<MovieDetailPageProps> = () => {
                 <h3>{details?.tagline}</h3>
                 <div className={styles.yv}>
                     <p className={styles.year}>( {new Date(details?.release_date).getFullYear()} )</p>
+                    <div
+                        className={`${styles.favBtnA}`}
+                    ></div>
                     <p className={styles.vote}>{details?.vote_average}</p>
                 </div>
                 <p>{details?.overview}</p>
